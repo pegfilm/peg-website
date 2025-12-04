@@ -1,0 +1,483 @@
+/* ======================================================
+   GLOBAL BASE STYLES
+   ====================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000;
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+/* ======================================================
+   HOMEPAGE LAYOUT
+   ====================================================== */
+
+.homepage-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+.left {
+    width: 75vw;
+    position: relative;
+    overflow: hidden;
+}
+
+.image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.full-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    position: relative;
+    z-index: 1;
+}
+
+.right {
+    width: 25vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 40px;
+}
+
+.right-img {
+    width: 90%;
+    height: auto;
+}
+
+.credit {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #ccc;
+    text-align: center;
+}
+
+/* ======================================================
+   HOMEPAGE HOTSPOTS
+   (You can remove background-color once done testing)
+   ====================================================== */
+
+.ohio-hotspot {
+    position: absolute;
+    left: 3%;
+    top: 15%;
+    width: 15%;
+    height: 82%;
+    background-color: rgba(255, 0, 0, 0.4); /* REMOVE WHEN READY */
+    border: none;
+    cursor: pointer;
+    z-index: 9999;
+    display: block;
+}
+
+.recent-hotspot {
+    position: absolute;
+    left: 20%;
+    top: 18%;
+    width: 18%;
+    height: 90%;
+    background-color: rgba(0, 255, 0, 0.5); /* REMOVE WHEN READY */
+    border: none;
+    cursor: pointer;
+    z-index: 9999;
+    display: block;
+}
+
+/* ======================================================
+   OHIO PAGE
+   ====================================================== */
+
+.ohio-flag-body {
+    background-color: #000;
+    width: 100%;
+    min-height: 100vh;
+    display: block;
+    overflow-y: auto;
+    overflow-x: hidden;
+    text-align: center;
+    position: relative;
+}
+
+.ohio-title {
+    text-align: center;
+    font-size: 90px;
+    color: #0f3ea6;
+    font-weight: bold;
+    font-style: italic;
+    text-transform: uppercase;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    letter-spacing: 6px;
+    position: relative;
+    z-index: 10;
+}
+
+.ohio-subtext {
+    color: white;
+    font-size: 22px;
+    margin-top: -10px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-style: italic;
+    letter-spacing: 1px;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ohio-flag {
+    width: 80%;
+    max-width: 800px;
+    height: auto;
+    margin: 0 auto 40px auto;
+    display: block;
+}
+
+.ohio-gallery {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.ohio-gallery img {
+    width: 300px;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+    transition: transform 0.2s ease;
+}
+
+.ohio-gallery img:hover {
+    transform: scale(1.03);
+}
+
+/* ======================================================
+   RECENT WORK PAGE
+   ====================================================== */
+
+.recent-body {
+    background-color: #000;
+    text-align: center;
+    color: white;
+    padding-bottom: 60px;
+}
+
+.recent-title {
+    text-align: center;
+    font-size: 80px;
+    color: #0f3ea6;
+    font-weight: bold;
+    font-style: italic;
+    text-transform: uppercase;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    letter-spacing: 6px;
+}
+
+.recent-gallery {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 50px;
+}
+
+.recent-card {
+    width: 500px;
+    text-align: center;
+}
+
+/* Hover swap system */
+.swap-box {
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+.swap-video,
+.swap-photo {
+    width: 100%;
+    border-radius: 10px;
+    transition: opacity 0.25s ease;
+}
+
+.swap-photo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+.swap-box:hover .swap-video {
+    opacity: 0;
+}
+
+.swap-box:hover .swap-photo {
+    opacity: 1;
+}
+
+/* ======================================================
+   MOBILE RESPONSIVE LAYOUT
+   ====================================================== */
+
+@media (max-width: 900px) {
+
+    body {
+        overflow-x: hidden;
+    }
+
+    /* Homepage mobile */
+    .homepage-container {
+        flex-direction: column;
+        height: auto;
+        width: 100%;
+    }
+
+    .left {
+        width: 100vw;
+        height: auto;
+    }
+
+    .full-img {
+        width: 100%;
+        height: auto;
+    }
+
+    .right {
+        width: 100vw;
+        padding-top: 20px;
+    }
+
+    .right-img {
+        width: 70%;
+        margin: 0 auto;
+    }
+
+    .ohio-hotspot,
+    .recent-hotspot {
+        background-color: transparent !important;
+        width: 40%;
+        height: 25%;
+        top: 60%;
+    }
+
+    .ohio-hotspot { left: 10%; }
+    .recent-hotspot { left: 50%; }
+
+    /* Ohio mobile */
+    .ohio-title {
+        font-size: 40px;
+        margin-top: 20px;
+        letter-spacing: 3px;
+    }
+
+    .ohio-subtext {
+        font-size: 16px;
+        max-width: 90%;
+    }
+
+    .ohio-flag {
+        width: 90%;
+        max-width: 450px;
+    }
+
+    .ohio-gallery { gap: 15px; }
+
+    .ohio-gallery img {
+        width: 45%;
+        max-width: 180px;
+    }
+
+    /* Recent work mobile */
+    .recent-title {
+        font-size: 45px;
+        margin-bottom: 20px;
+    }
+
+    .recent-card {
+        width: 90%;
+        max-width: 350px;
+    }
+
+    .swap-video,
+    .swap-photo {
+        width: 100%;
+    }
+
+    .swap-photo {
+        opacity: 1;
+        position: relative;
+        margin-top: 10px;
+    }
+
+    .swap-video {
+        display: none;
+    }
+}
+
+/* ======================================================
+   FULLSCREEN INTRO OVERLAY (ALWAYS ACTIVE)
+   ====================================================== */
+
+#intro-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999999;
+    overflow: hidden;
+    transition: opacity 0.8s ease;
+}
+
+#intro-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.intro-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+/* ======================================================
+   DRAG-TO-ENTER CAR (FINAL VERSION)
+   ====================================================== */
+
+#drag-car {
+    position: absolute;
+    width: 115px;             /* FINAL SIZE (1.5× original) */
+    height: auto;
+    left: -20px;               /* Small offset from left edge */
+    top: 55%;                 /* Align vertically with track */
+    transform: translateY(-50%);
+    z-index: 1000000;         /* Above everything else */
+    touch-action: none;
+    cursor: grab;
+}
+
+#drag-car:active {
+    cursor: grabbing;
+}
+
+/* ======================================================
+   GLOWING UNLOCK TRACK
+   ====================================================== */
+
+#slider-track {
+    position: absolute;
+    width: 85%;
+    height: 65px;
+    top: 55%;                 /* Same vertical alignment as car */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 40px;
+    z-index: 999998;
+
+    box-shadow:
+        0 0 20px rgba(255,255,255,0.6),
+        0 0 35px rgba(255,255,255,0.4),
+        inset 0 0 25px rgba(255,255,255,0.15);
+    animation: sliderGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes sliderGlow {
+    from {
+        box-shadow:
+            0 0 10px rgba(255,255,255,0.3),
+            0 0 25px rgba(255,255,255,0.2),
+            inset 0 0 5px rgba(255,255,255,0.1);
+    }
+    to {
+        box-shadow:
+            0 0 30px rgba(255,255,255,0.7),
+            0 0 50px rgba(255,255,255,0.5),
+            inset 0 0 15px rgba(255,255,255,0.2);
+    }
+}
+
+/* ======================================================
+   MARIO PARTY "DRAG TO ENTER" TEXT
+   ====================================================== */
+
+/* ======================================================
+   MARIO PARTY "DRAG TO ENTER" TEXT
+   ====================================================== */
+
+#slider-text {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Arial Black', 'Impact', sans-serif;
+    font-size: 32px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+/* INDIVIDUAL MARIO PARTY LETTER COLORS */
+#slider-text .c1 { color: #ff4d4d !important; }   /* red */
+#slider-text .c2 { color: #ffd84d !important; }   /* yellow */
+#slider-text .c3 { color: #4dff4d !important; }   /* green */
+#slider-text .c4 { color: #4d4dff !important; }   /* blue */
+#slider-text .c5 { color: #ff8c4d !important; }   /* orange */
+#slider-text .c6 { color: #c44dff !important; }   /* purple */
+#slider-text .c7 { color: #ff4dc4 !important; }   /* pink */
+#slider-text .c8 { color: #4dffd8 !important; }   /* teal */
+
+
+    /* OUTLINE (Mario Party style) */
+    -webkit-text-stroke: 3px #1a1a1a;
+
+    text-shadow:
+        0 0 4px rgba(255,255,255,0.8),
+        0 0 8px rgba(255,255,255,0.6),
+        3px 3px 0px rgba(0,0,0,0.4);
+
+    pointer-events: none;
+    z-index: 1000002;
+
+    animation:
+        gradientShift 6s linear infinite,
+        textPulse 2s ease-in-out infinite;
+}
+
+
+@keyframes gradientShift {
+    0%   { background-position: 0%; }
+    100% { background-position: 400%; }
+}
+
+@keyframes textPulse {
+    0%   { filter: brightness(1); }
+    50%  { filter: brightness(1.5); }
+    100% { filter: brightness(1); }
+}
+
+
+
+
+

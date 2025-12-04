@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peg Website</title>
+    <link rel="stylesheet" href="style.css?v=1001">
+</head>
+
+<body>
+
+<!-- ============================
+     FULLSCREEN INTRO (with draggable car)
+     ============================ -->
+<div id="intro-screen">
+    <img src="images/rugtemp2.jpeg" class="intro-bg">
+
+    <div id="slider-track">
+        <span id="slider-text">drag to enter</span>
+    </div>
+
+    <img src="images/carmouse.png.webp" id="drag-car">
+</div>
+
+
+
+<!-- ============================
+     ACTUAL HOMEPAGE CONTENT
+     ============================ -->
+<div class="homepage-container">
+
+    <div class="left">
+        <div class="image-wrapper">
+            <img src="images/chatgpt_edit.jpg" class="full-img">
+            <a href="ohio.html" class="ohio-hotspot"></a>
+            <a href="recent.html" class="recent-hotspot"></a>
+        </div>
+    </div>
+
+    <div class="right">
+        <img src="images/26361732_331396884032889_543068210505711616_n.jpg" class="right-img">
+        <p class="credit">George Bellows (1915), Public Domain — thanks twin.</p>
+    </div>
+
+</div>
+
+
+<!-- ============================
+     DRAG-TO-ENTER SCRIPT
+     ============================ -->
+<script>
+const car = document.getElementById("drag-car");
+const intro = document.getElementById("intro-screen");
+
+let isDragging = false;
+let startX = 0;
+let currentX = 0;
+
+// END threshold = 40% of screen width (iPhone-style)
+const finishLine = window.innerWidth * 0.40;
+
+// START DRAG
+car.addEventListener("pointerdown", (e) => {
+    isDragging = true;
+    startX = e.clientX - car.offsetLeft;
+    car.setPointerCapture(e.pointerId);
+});
+
+// DRAG MOVEMENT
+car.addEventListener("pointermove", (e) => {
+    if (!isDragging) return;
+
+    currentX = e.clientX - startX;
+
+    // Boundaries
+    if (currentX < 0) currentX = 0;
+    if (currentX > window.innerWidth - car.offsetWidth) {
+        currentX = window.innerWidth - car.offsetWidth;
+    }
+
+    car.style.left = currentX + "px";
+
+    // SUCCESS — reached 40% → unlock
+    if (currentX >= finishLine) {
+        intro.classList.add("hidden");
+        isDragging = false;
+    }
+});
+
+// RELEASE – if not far enough, reset
+car.addEventListener("pointerup", () => {
+    if (!isDragging) return;
+    isDragging = false;
+
+    if (currentX < finishLine) {
+        car.style.left = "20px";
+    }
+});
+</script>
+
+
+</body>
+</html>
