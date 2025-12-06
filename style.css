@@ -905,3 +905,41 @@ html, body {
         left: 180px !important;   /* adjust this number as needed */
     }
 }
+/* ===============================================
+   DESKTOP — COMPLETELY REMOVE INTRO FROM DISPLAY
+   =============================================== */
+@media (min-width: 900px) {
+    #intro-screen {
+        display: none !important;
+    }
+}
+/* ===============================================
+   HIDE INTRO ON DESKTOP (mouse/trackpad devices)
+   SHOW INTRO ONLY ON TOUCH DEVICES (phones/tablets)
+   =============================================== */
+@media (hover: hover) and (pointer: fine) {
+    #intro-screen {
+        display: none !important;
+    }
+}
+/* ===============================================
+   MOBILE — Bigger car + Glow effect
+   =============================================== */
+@media (max-width: 900px) {
+
+    #drag-car {
+        transform: translateY(-50%) scale(1.5); /* 1.5× size */
+        filter: drop-shadow(0 0 12px rgba(255,255,255,0.85))
+                drop-shadow(0 0 20px rgba(255,255,255,0.55))
+                drop-shadow(0 0 30px rgba(255,255,255,0.35));
+        transition: filter 0.2s ease, transform 0.2s ease;
+    }
+
+    /* Optional: car glows even brighter *while dragging* */
+    #drag-car:active {
+        filter: drop-shadow(0 0 18px rgba(255,255,255,1))
+                drop-shadow(0 0 26px rgba(255,255,255,0.8))
+                drop-shadow(0 0 40px rgba(255,255,255,0.6));
+        transform: translateY(-50%) scale(1.55);
+    }
+}
