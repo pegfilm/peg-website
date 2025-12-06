@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+    <style>
+    @media (min-width: 900px) {
+        #intro-screen { display: none !important; }
+    }
+</style>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,6 +20,7 @@
      ============================ -->
 <div id="intro-screen">
     <img src="images/rugtemp2.jpeg" class="intro-bg">
+
     <div id="intro-header" class="twister-text">
         <h1 class="intro-name">Mike "Peg" Knauer</h1>
         <h2 class="intro-role">Assistant Director / Filmmaker</h2>
@@ -40,7 +47,7 @@
         <span class="c4">R</span>
     </div>
 
-    <!-- ⭐ DRAGGABLE CAR (ORIGINAL, NO HITBOX) -->
+    <!-- ⭐ DRAGGABLE CAR -->
     <img src="images/carmouse.png.webp" id="drag-car">
 </div>
 
@@ -75,25 +82,47 @@
 
 
 <!-- ============================
-     ORIGINAL DRAG-TO-ENTER SCRIPT
-     (exactly what you started with)
+     ANIMATED WAVE FOOTER
+     ============================ -->
+<div class="wave-footer">
+    <div class="wave wave1"></div>
+    <div class="wave wave2"></div>
+    <div class="wave wave3"></div>
+    <div class="wave wave4"></div>
+</div>
+
+
+<!-- ============================
+     JAVASCRIPT (DESKTOP + MOBILE)
      ============================ -->
 <script>
-// If desktop, skip intro entirely
+
+// ===============================
+// DESKTOP — Skip intro instantly
+// ===============================
 if (window.innerWidth >= 900) {
-    document.getElementById("intro-screen").style.display = "none";
+    const intro = document.getElementById("intro-screen");
+
+    // Fade it out smoothly
+    intro.classList.add("hidden");
+
+    // Remove intro after fade completes (optional, cleaner)
+    setTimeout(() => {
+        intro.style.display = "none";
+    }, 900);
 }
 
-// --- your existing script continues below ---
+// ===============================
+// MOBILE — Drag-to-enter (original)
+// ===============================
 const car = document.getElementById("drag-car");
 const intro = document.getElementById("intro-screen");
-
 
 let isDragging = false;
 let startX = 0;
 let currentX = 0;
 
-// END threshold = 40% of screen width (iPhone-style)
+// 40% unlock threshold
 const finishLine = window.innerWidth * 0.40;
 
 // START DRAG
@@ -109,7 +138,6 @@ car.addEventListener("pointermove", (e) => {
 
     currentX = e.clientX - startX;
 
-    // Boundaries
     if (currentX < 0) currentX = 0;
     if (currentX > window.innerWidth - car.offsetWidth) {
         currentX = window.innerWidth - car.offsetWidth;
@@ -117,14 +145,18 @@ car.addEventListener("pointermove", (e) => {
 
     car.style.left = currentX + "px";
 
-    // SUCCESS — reached 40% → unlock
+    // SUCCESS — reached unlock
     if (currentX >= finishLine) {
         intro.classList.add("hidden");
         isDragging = false;
+
+        setTimeout(() => {
+            intro.style.display = "none";
+        }, 900);
     }
 });
 
-// RELEASE – if not far enough, reset
+// RELEASE — Not far enough → reset
 car.addEventListener("pointerup", () => {
     if (!isDragging) return;
     isDragging = false;
@@ -133,17 +165,8 @@ car.addEventListener("pointerup", () => {
         car.style.left = "20px";
     }
 });
-</script>
 
-<!-- ============================
-     ANIMATED WAVE FOOTER
-     ============================ -->
-<div class="wave-footer">
-    <div class="wave wave1"></div>
-    <div class="wave wave2"></div>
-    <div class="wave wave3"></div>
-    <div class="wave wave4"></div>
-</div>
+</script>
 
 </body>
 </html>
