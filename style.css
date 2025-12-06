@@ -12,6 +12,13 @@ body {
     font-family: Arial, sans-serif;
     color: white;
 }
+/* ===== Prevent extra scrolling on homepage ===== */
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+    overscroll-behavior-y: none;
+}
+
 
 /* ======================================================
    HOMEPAGE LAYOUT
@@ -19,14 +26,20 @@ body {
 
 .homepage-container {
     display: flex;
-    height: 100vh;
+    min-height: 100vh;
+    max-height: 100vh;   /* ← semicolon was missing */
     width: 100vw;
+    padding-bottom: 180px;
+    overflow: hidden;    /* stops extra scrolling */
 }
+
+
 
 .left {
     width: 75vw;
     position: relative;
     overflow: hidden;
+    min-height: 100vh; /* ⭐ THIS FIXES THE CAPPING ISSUE */
 }
 
 .image-wrapper {
@@ -36,13 +49,12 @@ body {
     overflow: visible;
 }
 
+
 .full-img {
-    width: 100%;
     height: auto;
-    display: block;
-    position: relative;
-    z-index: 1;
+    width: 100%;
 }
+
 
 .right {
     width: 25vw;
@@ -70,31 +82,240 @@ body {
    (You can remove background-color once done testing)
    ====================================================== */
 
+/* ======================================================
+   ALL HOMEPAGE HOTSPOTS — GRADIENT + WATERFALL ANIMATION
+   ====================================================== */
+
+/* 🔴 OHIO HOTSPOT */
 .ohio-hotspot {
     position: absolute;
-    left: 3%;
-    top: 15%;
-    width: 15%;
-    height: 82%;
-    background-color: rgba(255, 0, 0, 0.4); /* REMOVE WHEN READY */
-    border: none;
+    left: 2.5%;
+    top: 16%;
+    width: 15.5%;
+    height: 180%; /* your original “working” range */
     cursor: pointer;
     z-index: 9999;
-    display: block;
+    overflow: hidden;
+
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 0, 0, 0.00) 0%,
+        rgba(255, 0, 0, 0.05) 0.001%,
+        rgba(255, 0, 0, 0.10) 0.01%,
+        rgba(255, 0, 0, 0.20) 1%,
+        rgba(255, 0, 0, 0.26) 12%,
+        rgba(255, 0, 0, 0.26) 40%,
+        rgba(255, 0, 0, 0.26) 100%
+    );
 }
 
+.ohio-hotspot::after {
+    content: "";
+    position: absolute;
+    top: -120%;
+    left: 0;
+    width: 100%;
+    height: 300%;
+    pointer-events: none;
+
+    background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.18) 30%,
+        rgba(255,255,255,0) 70%
+    );
+
+    animation: hotspotWaterfall 2.2s linear infinite;
+}
+
+
+/* 🟢 RECENT HOTSPOT */
 .recent-hotspot {
     position: absolute;
-    left: 20%;
-    top: 18%;
+    left: 20.5%;
+    top: 23.5%;
     width: 18%;
-    height: 90%;
-    background-color: rgba(0, 255, 0, 0.5); /* REMOVE WHEN READY */
-    border: none;
+    height: 80%;
     cursor: pointer;
     z-index: 9999;
-    display: block;
+    overflow: hidden;
+
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 255, 0, 0.00) 0%,
+        rgba(0, 255, 0, 0.05) 0.001%,
+        rgba(0, 255, 0, 0.10) 0.01%,
+        rgba(0, 255, 0, 0.20) 1%,
+        rgba(0, 255, 0, 0.26) 12%,
+        rgba(0, 255, 0, 0.26) 40%,
+        rgba(0, 255, 0, 0.26) 100%
+    );
 }
+
+.recent-hotspot::after {
+    content: "";
+    position: absolute;
+    top: -120%;
+    left: 0;
+    width: 100%;
+    height: 300%;
+    pointer-events: none;
+
+    background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.18) 30%,
+        rgba(255,255,255,0) 70%
+    );
+
+    animation: hotspotWaterfall 2.2s linear infinite;
+}
+
+
+/* 🔵 RESUME HOTSPOT */
+.resume-hotspot {
+    position: absolute;
+    left: 40%;
+    top: 16%;
+    width: 16.5%;
+    height: 180%;
+    cursor: pointer;
+    z-index: 9999;
+    overflow: hidden;
+
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 255, 0.00) 0%,
+        rgba(0, 0, 255, 0.05) 0.001%,
+        rgba(0, 0, 255, 0.10) 0.01%,
+        rgba(0, 0, 255, 0.20) 1%,
+        rgba(0, 0, 255, 0.26) 12%,
+        rgba(0, 0, 255, 0.26) 40%,
+        rgba(0, 0, 255, 0.26) 100%
+    );
+}
+
+.resume-hotspot::after {
+    content: "";
+    position: absolute;
+    top: -120%;
+    left: 0;
+    width: 100%;
+    height: 300%;
+    pointer-events: none;
+
+    background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.18) 30%,
+        rgba(255,255,255,0) 70%
+    );
+
+    animation: hotspotWaterfall 2.2s linear infinite;
+}
+.creative-hotspot {
+    position: absolute;
+    left: 64.8%;
+    top: 16%;
+    width: 14.5%;
+    height: 180%;
+    cursor: pointer;
+    z-index: 9999;
+    overflow: hidden;
+
+    /* Gold gradient fade-in (same curve as others) */
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 215, 0, 0.00) 0%,      /* transparent top */
+        rgba(255, 215, 0, 0.05) 0.001%,  /* faint */
+        rgba(255, 215, 0, 0.10) 0.01%,   /* subtle fade */
+        rgba(255, 215, 0, 0.20) 1%,      /* sharp jump */
+        rgba(255, 215, 0, 0.26) 12%,     /* stable opacity */
+        rgba(255, 215, 0, 0.26) 40%,
+        rgba(255, 215, 0, 0.26) 100%
+    );
+}
+
+/* Waterfall shimmer (same animation as all other hotspots) */
+.creative-hotspot::after {
+    content: "";
+    position: absolute;
+    top: -120%;
+    left: 0;
+    width: 100%;
+    height: 300%;
+    pointer-events: none;
+
+    background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.18) 30%,
+        rgba(255,255,255,0) 70%
+    );
+
+    animation: hotspotWaterfall 2.2s linear infinite;
+}
+.contact-hotspot {
+    position: absolute;
+    left: 82.5%;
+    top: 16%;
+    width: 15%;
+    height: 180%;
+    cursor: pointer;
+    z-index: 9999;
+    overflow: hidden;
+
+    /* Purple gradient fade-in (same curve as others) */
+    background: linear-gradient(
+        to bottom,
+        rgba(196, 77, 255, 0.00) 0%,       /* transparent top */
+        rgba(196, 77, 255, 0.05) 0.001%,   /* faint */
+        rgba(196, 77, 255, 0.10) 0.01%,    /* subtle fade */
+        rgba(196, 77, 255, 0.20) 1%,       /* sharp jump */
+        rgba(196, 77, 255, 0.26) 12%,      /* stable opacity */
+        rgba(196, 77, 255, 0.26) 40%,
+        rgba(196, 77, 255, 0.26) 100%
+    );
+}
+
+.contact-hotspot::after {
+    content: "";
+    position: absolute;
+    top: -120%;
+    left: 0;
+    width: 100%;
+    height: 300%;
+    pointer-events: none;
+
+    /* Waterfall shimmer (same as others) */
+    background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.18) 30%,
+        rgba(255,255,255,0) 70%
+    );
+
+    animation: hotspotWaterfall 2.2s linear infinite;
+}
+
+
+
+/* ======================================================
+   UNIVERSAL WATERFALL ANIMATION
+   ====================================================== */
+
+@keyframes hotspotWaterfall {
+    0%   { transform: translateY(0); }
+    100% { transform: translateY(100%); }
+}
+
+
+
+
+
+
+
+
 
 /* ======================================================
    OHIO PAGE
@@ -119,7 +340,6 @@ body {
     font-style: italic;
     text-transform: uppercase;
     margin-top: 40px;
-    margin-bottom: 20px;
     letter-spacing: 6px;
     position: relative;
     z-index: 10;
@@ -129,7 +349,6 @@ body {
     color: white;
     font-size: 22px;
     margin-top: -10px;
-    margin-bottom: 30px;
     text-align: center;
     font-style: italic;
     letter-spacing: 1px;
@@ -186,7 +405,6 @@ body {
     font-style: italic;
     text-transform: uppercase;
     margin-top: 40px;
-    margin-bottom: 40px;
     letter-spacing: 6px;
 }
 
@@ -232,104 +450,77 @@ body {
     opacity: 1;
 }
 
-/* ======================================================
-   MOBILE RESPONSIVE LAYOUT
-   ====================================================== */
-
 @media (max-width: 900px) {
 
-    body {
-        overflow-x: hidden;
+    /* FORCE MULTILINE WRAPPING */
+    #intro-header,
+    #intro-header * {
+        white-space: normal !important;
+        display: block;
     }
 
-    /* Homepage mobile */
-    .homepage-container {
-        flex-direction: column;
-        height: auto;
-        width: 100%;
+    /* SHRINK FOR SAFE FIT */
+    .intro-name {
+        font-size: 26px;
+        letter-spacing: 0.5px;
     }
 
-    .left {
-        width: 100vw;
-        height: auto;
-    }
-
-    .full-img {
-        width: 100%;
-        height: auto;
-    }
-
-    .right {
-        width: 100vw;
-        padding-top: 20px;
-    }
-
-    .right-img {
-        width: 70%;
-        margin: 0 auto;
-    }
-
-    .ohio-hotspot,
-    .recent-hotspot {
-        background-color: transparent !important;
-        width: 40%;
-        height: 25%;
-        top: 60%;
-    }
-
-    .ohio-hotspot { left: 10%; }
-    .recent-hotspot { left: 50%; }
-
-    /* Ohio mobile */
-    .ohio-title {
-        font-size: 40px;
-        margin-top: 20px;
-        letter-spacing: 3px;
-    }
-
-    .ohio-subtext {
+    .intro-role {
         font-size: 16px;
-        max-width: 90%;
+        letter-spacing: 0.5px;
     }
 
-    .ohio-flag {
-        width: 90%;
-        max-width: 450px;
+    .intro-cities {
+        font-size: 14px;
+        letter-spacing: 1.5px;
     }
 
-    .ohio-gallery { gap: 15px; }
-
-    .ohio-gallery img {
-        width: 45%;
-        max-width: 180px;
-    }
-
-    /* Recent work mobile */
-    .recent-title {
-        font-size: 45px;
-        margin-bottom: 20px;
-    }
-
-    .recent-card {
-        width: 90%;
-        max-width: 350px;
-    }
-
-    .swap-video,
-    .swap-photo {
-        width: 100%;
-    }
-
-    .swap-photo {
-        opacity: 1;
-        position: relative;
-        margin-top: 10px;
-    }
-
-    .swap-video {
-        display: none;
+    /* Move header up so Slide To Enter is not covered */
+    #intro-header {
+        top: 6%;
     }
 }
+
+    /* MOBILE TWISTER STYLE — cleaner shadows & outline */
+    .twister-text {
+        -webkit-text-stroke: 1px #3a0a0a;
+        text-shadow:
+            0px -1px 1px rgba(255,255,255,0.3),
+            0px 2px 3px rgba(0,0,0,0.5);
+    }
+
+/* SLIDE TO ENTER */
+#slider-text {
+    font-size: 22px;
+    top: 68%;
+}
+
+/* Desktop-only HITBOX that stays centered on the car */
+@media (min-width: 900px) {
+    #drag-hitbox {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 220px;        /* Large grab zone */
+        z-index: 1000001;
+        pointer-events: auto;
+        cursor: grab;
+        transform: translateY(-50%);  /* match car alignment */
+    }
+
+    #drag-hitbox:active {
+        cursor: grabbing;
+    }
+}
+
+
+
+
+
+
+
+
+
 
 /* ======================================================
    FULLSCREEN INTRO OVERLAY (ALWAYS ACTIVE)
@@ -381,6 +572,7 @@ body {
     cursor: grabbing;
 }
 
+
 /* ======================================================
    GLOWING UNLOCK TRACK
    ====================================================== */
@@ -422,10 +614,6 @@ body {
    MARIO PARTY "DRAG TO ENTER" TEXT
    ====================================================== */
 
-/* ======================================================
-   MARIO PARTY "DRAG TO ENTER" TEXT
-   ====================================================== */
-
 #slider-text {
     position: absolute;
     width: 100%;
@@ -438,18 +626,7 @@ body {
     font-weight: 900;
     letter-spacing: 3px;
     text-transform: uppercase;
-/* INDIVIDUAL MARIO PARTY LETTER COLORS */
-#slider-text .c1 { color: #ff4d4d !important; }   /* red */
-#slider-text .c2 { color: #ffd84d !important; }   /* yellow */
-#slider-text .c3 { color: #4dff4d !important; }   /* green */
-#slider-text .c4 { color: #4d4dff !important; }   /* blue */
-#slider-text .c5 { color: #ff8c4d !important; }   /* orange */
-#slider-text .c6 { color: #c44dff !important; }   /* purple */
-#slider-text .c7 { color: #ff4dc4 !important; }   /* pink */
-#slider-text .c8 { color: #4dffd8 !important; }   /* teal */
 
-
-    /* OUTLINE (Mario Party style) */
     -webkit-text-stroke: 3px #1a1a1a;
 
     text-shadow:
@@ -461,10 +638,149 @@ body {
     z-index: 1000002;
 
     animation:
-        gradientShift 6s linear infinite,
         textPulse 2s ease-in-out infinite;
 }
 
+/* INDIVIDUAL LETTER COLORS */
+#slider-text .c1 { color: #ff4d4d !important; }
+#slider-text .c2 { color: #ffd84d !important; }
+#slider-text .c3 { color: #4dff4d !important; }
+#slider-text .c4 { color: #4d4dff !important; }
+#slider-text .c5 { color: #ff8c4d !important; }
+#slider-text .c6 { color: #c44dff !important; }
+#slider-text .c7 { color: #ff4dc4 !important; }
+#slider-text .c8 { color: #4dffd8 !important; }
+
+
+
+/* ======================================
+   GLOBAL INTRO HEADER – REFINED
+   ====================================== */
+
+#intro-header {
+    position: absolute;
+    top: 12%;   /* Moves everything higher */
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 1000003;
+    pointer-events: none;
+    width: 90%;
+}
+
+/* Shared Twister-style typography */
+.intro-name,
+.intro-role,
+.intro-cities {
+    white-space: nowrap;
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-family: 'Arial Black', sans-serif;
+
+    /* Thinner + sharper outline */
+    -webkit-text-stroke: 1.4px #4b0000;
+
+    /* Cleaner, more readable shadow */
+    text-shadow:
+        2px 2px 4px rgba(0,0,0,0.7),
+        0px 0px 8px rgba(0,0,0,0.4);
+    color: white;
+}
+
+/* NAME */
+.intro-name {
+    font-size: 48px;
+    letter-spacing: 1px;
+    font-weight: 900;
+}
+
+/* ROLE — must fit on one line on mobile */
+.intro-role {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 1px;      /* LESS spacing = fits on mobile */
+    margin-top: 6px;
+}
+
+/* CITIES */
+.intro-cities {
+    font-size: 20px;
+    letter-spacing: 3px;
+    margin-top: 4px;
+}
+
+
+/* ======================================================
+   TWISTER STYLE — BASE (applies to both desktop & mobile)
+   ====================================================== */
+
+.twister-text {
+    font-family: 'Arial Black', Impact, sans-serif;
+    font-weight: 900;
+    font-style: italic;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+
+    /* Twister gradient color */
+    background: linear-gradient(to bottom, #d6a84b 15%, #8b1a1a 85%);
+    -webkit-background-clip: text;
+    color: transparent;
+
+    /* Outline */
+    -webkit-text-stroke: 2px #3a0a0a;
+
+    /* Bevel shadow */
+    text-shadow:
+        0px -1px 1px rgba(255,255,255,0.4),
+        0px 3px 4px rgba(0,0,0,0.7);
+}
+
+/* ======================================================
+   INTRO HEADER — DESKTOP DEFAULT
+   ====================================================== */
+
+#intro-header {
+    position: absolute;
+    top: 12%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    text-align: center;
+    pointer-events: none;
+    z-index: 1000003;
+}
+
+.intro-name {
+    font-size: 48px;
+    letter-spacing: 1px;
+}
+
+.intro-role {
+    font-size: 26px;
+    margin-top: 6px;
+}
+
+.intro-cities {
+    font-size: 20px;
+    letter-spacing: 3px;
+    margin-top: 4px;
+}
+
+/* ======================================================
+   SLIDE TO ENTER — DESKTOP DEFAULT
+   ====================================================== */
+
+#slider-text.twister-text {
+    font-size: 32px;
+    top: 50%;
+}
+
+
+
+/* ======================================
+   KEYFRAME ANIMATIONS (KEEP AT BOTTOM)
+   ====================================== */
 
 @keyframes gradientShift {
     0%   { background-position: 0%; }
@@ -477,7 +793,115 @@ body {
     100% { filter: brightness(1); }
 }
 
+@keyframes sliderGlow {
+    from {
+        box-shadow:
+            0 0 10px rgba(255,255,255,0.3),
+            0 0 25px rgba(255,255,255,0.2),
+            inset 0 0 5px rgba(255,255,255,0.1);
+    }
+    to {
+        box-shadow:
+            0 0 30px rgba(255,255,255,0.7),
+            0 0 50px rgba(255,255,255,0.5),
+            inset 0 0 15px rgba(255,255,255,0.2);
+    }
+}
+/* ======================================================
+   ANIMATED MULTI-COLOR WAVE FOOTER (HOTSPOT-MATCHED)
+   ====================================================== */
+
+.wave-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 160px;
+    pointer-events: none; /* waves cannot block clicks */
+    overflow: hidden;
+    z-index: 2000000; /* above hotspots, but below intro */
+}
+
+/* Shared wave base */
+.wave {
+    position: absolute;
+    bottom: 0;
+    width: 200%;
+    height: 140px;
+    background-repeat: repeat-x;
+    animation: waveMove 18s linear infinite;
+    opacity: 0.9;
+}
+/* Hide waves during intro screen */
+#intro-screen:not(.hidden) ~ .wave-footer {
+    display: none !important;
+}
 
 
+/* ---------- WAVE COLORS (matched to hotspot aesthetic) ---------- */
 
+/* Ohio – Muted Wine Red */
+.wave1 {
+    background: url('data:image/svg+xml;utf8,\
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="140" viewBox="0 0 1440 140">\
+<path fill="%23a13a3a" d="M0,90 C200,130 400,40 600,70 C800,100 1000,50 1200,80 C1300,95 1380,85 1440,70 L1440 140 L0 140 Z"></path>\
+</svg>');
+    animation-duration: 14s;
+    opacity: 0.45;
+}
 
+/* Recent – Deep Green */
+.wave2 {
+    background: url('data:image/svg+xml;utf8,\
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="140" viewBox="0 0 1440 140">\
+<path fill="%23315f3a" d="M0,95 C180,130 420,60 620,80 C820,100 1040,40 1260,70 C1350,85 1410,95 1440,90 L1440 140 L0 140 Z"></path>\
+</svg>');
+    animation-duration: 20s;
+    opacity: 0.40;
+}
+
+/* Resume – Plum/Indigo */
+.wave3 {
+    background: url('data:image/svg+xml;utf8,\
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="140" viewBox="0 0 1440 140">\
+<path fill="%23504a8d" d="M0,100 C220,140 440,50 640,70 C840,90 1080,55 1320,80 C1380,90 1410,100 1440,95 L1440 140 L0 140 Z"></path>\
+</svg>');
+    animation-duration: 26s;
+    opacity: 0.35;
+}
+
+/* Creative/Contact – Gold + Soft Violet Blend */
+.wave4 {
+    background: url('data:image/svg+xml;utf8,\
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="140" viewBox="0 0 1440 140">\
+<path fill="%23c7a45a" d="M0,110 C260,150 500,60 700,80 C900,100 1200,40 1400,70 C1420,85 1440,90 1440,85 L1440 140 L0 140 Z"></path>\
+</svg>');
+    animation-duration: 34s;
+    opacity: 0.28;
+}
+
+/* ---------- Animation ---------- */
+
+@keyframes waveMove {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+.right-note {
+    margin-top: 18px;
+    width: 90%;
+    text-align: center;
+    font-size: 8px;          /* smaller for mobile fit */
+    color: white;
+    line-height: 1.55;        /* more spacing between lines */
+    letter-spacing: 0.6px;
+    font-weight: 400;
+    font-style: italic;
+    opacity: 0.85;
+    white-space: nowrap;      /* forces each line to stay on one line */
+}
+/* Desktop-only car position override */
+@media (min-width: 900px) {
+    #drag-car {
+        left: 180px !important;   /* adjust this number as needed */
+    }
+}
